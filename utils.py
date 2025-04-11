@@ -7,7 +7,7 @@ alt = 26
 tz = 'Europe/Stockholm'
 observer = location.Location(latitude=lat, longitude=lon, altitude=alt, tz=tz)
 
-times = pd.date_range('2025-04-01 00:00', '2025-04-01 23:55', freq='5min', tz=tz)
+times = pd.date_range('2025-05-01 00:00', '2025-05-01 23:55', freq='5min', tz=tz)
 solpos = observer.get_solarposition(times)
 
 buildings = [
@@ -31,7 +31,7 @@ for b in buildings:
         (abs(solpos['azimuth'] - b["bearing"]) < azimuth_margin)
     )
     
-    shadow_mask |= shadowed  # Combine with OR: any building blocks = shadow
+    shadow_mask |= shadowed 
 
 # Times when location is in sun
 in_sun = (~shadow_mask) & (solpos['elevation'] > 4)
